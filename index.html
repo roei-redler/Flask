@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Difference Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Age Difference Calculator</h1>
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="user_birthdate">Your birth date:</label>
+                <input type="date" class="form-control" name="user_birthdate" id="user_birthdate" required>
+            </div>
+            <div class="form-group">
+                <label for="son_birthdate">Your son's birth date:</label>
+                <input type="date" class="form-control" name="son_birthdate" id="son_birthdate" required>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="logClick(event)">Calculate</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function logClick(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            console.log(`[Click Event] Coordinates: (${x}, ${y})`);
+
+            $.ajax({
+                url: '/log-click',
+                method: 'POST',
+                data: {x: x, y: y},
+                success: function() {
+                    console.log('Click event logged on the server.');
+                },
+                error: function() {
+                    console.log('Failed to log click event on the server.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
